@@ -2,14 +2,14 @@ Logstash Builder
 
 A modern, GUI-based tool designed to simplify the creation and visualization of Logstash pipelines. Built based on Logstash documentation version 9.0+
 
-🚀 Features
+🚀 Features:
 
 - Visual Pipeline Builder: An intuitive interface to design your Logstash input, filter, and output stages without writing raw configuration manually.
 
 - Drag and Drop or Double Click plugins on the left that you want to add
 
 - Add, update, or remove the configuration options on the far right
-  - if a custom config option is needed to be added, there is an add custom property for you on the bottom right of the properties panel
+  - If a custom config option is needed to be added, there is an add custom property for you on the bottom right of the properties panel
 
 - Drag and Drop reordering of the plugins in the middle work area
 
@@ -31,8 +31,8 @@ A modern, GUI-based tool designed to simplify the creation and visualization of 
 
 - A validation check to make sure you do not put an input plugin into an output plugin, etc.
 
-Winter Festive Mode ❄️:
+❄️ Winter Festive Mode:
 
-- Automatically activates during the holiday season (December 1st – December 30th).
-
-- Toggle "Festive Mode" in the top bar to turn the snow on or off.
+  - Automatically activates during the holiday season (December 1st – December 30th).
+  
+  - Toggle "Festive Mode" in the top bar to turn the snow on or off.
