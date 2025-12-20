@@ -3,12 +3,12 @@ import Snowfall from '@/components/Snowfall';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-slate-950">
-      <div className="relative z-0">
+    <main className="min-h-screen bg-slate-950 relative">
+      <div className="relative z-10">
         <LogstashBuilder />
       </div>
 
-      <div className="absolute inset-0 z-50 pointer-events-none opacity-40 mix-blend-screen">
+      <div className="absolute inset-0 z-20 pointer-events-none">
         <Snowfall />
       </div>
     </main>
