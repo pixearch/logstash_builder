@@ -1,5 +1,5 @@
 import LogstashBuilder from '@/components/LogstashBuilder';
-import Snowfall from '../components/Snowfall';
+import Snowfall from '@/components/Snowfall';
 
 export default function Home() {
   return (
