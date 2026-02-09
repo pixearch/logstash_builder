@@ -697,11 +697,11 @@ const parseLogstashConfig = (configStr: string) => {
                  
                  const key = keyToken as string;
                  const arrow = readToken();
-                 if (arrow === '=>') {
-                    let val = parseValue();
+                  if (arrow === '=>') {
+                    let val: any = parseValue();
                     if (name === 'grok' && key === 'match') val = parseGrokMatch(val);
-                    props[key] = val;
-                 }
+                    (props as any)[key] = val;
+                  }
               }
 
               let category = 'filter'; 
