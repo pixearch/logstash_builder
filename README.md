@@ -1,38 +1,36 @@
-Logstash Builder
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-A modern, GUI-based tool designed to simplify the creation and visualization of Logstash pipelines. Built based on Logstash documentation version 9.0+
+## Getting Started
 
-🚀 Features:
+First, run the development server:
 
-- Visual Pipeline Builder: An intuitive interface to design your Logstash input, filter, and output stages without writing raw configuration manually.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-- Drag and Drop or Double Click plugins on the left that you want to add
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Add, update, or remove the configuration options on the far right
-  - If a custom config option is needed to be added, there is an add custom property for you on the bottom right of the properties panel
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-- Drag and Drop reordering of the plugins in the middle work area
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- An Insights button give a list of detected fields 
-  - This shows which plugins have correlating fields to trace the data flow (i.e. message field in the input generator plugin feeding the message field in the filter grok plugin)
+## Learn More
 
-- A View Config button to see the raw config
-  - You can copy striaght from there if you want with the copy button at the top right of the config
+To learn more about Next.js, take a look at the following resources:
 
-- An export button to download the config as is
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- A reset button with confirmation to keep from accidentally resetting
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- Confirmation on plugin deletions if you've modified the values at all to avoid accidentally deleting your work in a plugin
+## Deploy on Vercel
 
-- Expand and Collapse all on the top left for the plugins list
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- A filter as you type search bar to quickly search for plugins
-
-- A validation check to make sure you do not put an input plugin into an output plugin, etc.
-
-❄️ Winter Festive Mode:
-
-  - Automatically activates during the holiday season (December 1st – December 30th).
-  
-  - Toggle "Festive Mode" in the top bar to turn the snow on or off.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
