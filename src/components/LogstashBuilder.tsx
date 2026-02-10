@@ -5,7 +5,7 @@ import {
   Box, Trash2, ChevronRight, ChevronDown, Settings, Plus, ArrowRightFromLine, 
   FolderOpen, Maximize2, X, List, MinusCircle, Search, MessageSquare, Activity, 
   RotateCcw, Download, Share2, GripVertical, AlertCircle, Code, Save, ChevronsDown, 
-  ChevronsUp, Copy, Check, AlertTriangle, Upload, WrapText 
+  ChevronsUp, Copy, Check, AlertTriangle, Upload, WrapText, ChevronLeft 
 } from 'lucide-react';
 
 // --- 1. Constants & Definitions ---
@@ -263,117 +263,6 @@ const PLUGIN_DEFINITIONS: any = {
     wmi: { host: '""', interval: "10", namespace: '"root\\cimv2"', password: '""', query: '""', user: '""' },
     xmpp: { host: '""', password: '""', rooms: "[]", user: '""' },
   },
-  filter: {
-    age: { target_field: '"age"', add_tag: '["age_calculated"]' },
-    aggregate: { task_id: '"%{task_id}"', code: "\"map['clicks'] ||= 0; map['clicks'] += 1;\"", push_map_as_event_on_timeout: "true", timeout: "600", timeout_tags: '["_aggregatetimeout"]' },
-    alter: { coalesce: '[ "field", "value1", "value2" ]', condrewrite: '[ "field", "expected_value", "new_value" ]', condrewriteother: '[ "field", "expected_value", "target_field", "new_value" ]' },
-    bytes: { source: '"bytes_field"', target: '"bytes_int"', conversion_method: '"binary"' },
-    cidr: { address: '["%{clientip}"]', network: '["192.168.0.0/24"]', network_path: '"/etc/logstash/networks.txt"', refresh_interval: "600", separator: '","', add_tag: '["_cidr_matched"]' },
-    cipher: { algorithm: '"aes-256-cbc"', base64: "true", cipher_padding: "null", iv_random_length: "16", key: '"12345678901234567890123456789012"', key_pad: '"\0"', key_size: "256", max_cipher_reuse: "1", mode: '"encrypt"', source: '"message"', target: '"message_crypted"' },
-    clone: { clones: '["cloned_type_1", "cloned_type_2"]', ecs_compatibility: '"disabled"', add_tag: '["cloned"]' },
-    csv: { autodetect_column_names: "false", autogenerate_column_names: "true", columns: '["col1", "col2"]', convert: '{ "col1" => "integer" }', ecs_compatibility: '"disabled"', quote_char: '"\\""', separator: '","', skip_empty_columns: "false", skip_empty_rows: "false", skip_header: "false", source: '"message"', target: "null" },
-    date: { match: '[ "logdate", "MMM dd yyyy HH:mm:ss", "MMM  d yyyy HH:mm:ss", "ISO8601" ]', target: '"@timestamp"', timezone: '"UTC"', locale: '"en"', tag_on_failure: '["_dateparsefailure"]' },
-    de_dot: { fields: '["field.with.dots"]', nested: "false", recursive: "true", separator: '"_"' },
-    dissect: { mapping: '{ "message" => "%{ts} %{+ts} %{src} %{} %{prog}[%{pid}]: %{msg}" }', convert_datatype: '{ "pid" => "int" }', tag_on_failure: '["_dissectfailure"]' },
-    dns: { action: '"append"', failed_cache_size: "0", failed_cache_ttl: "5", hit_cache_size: "0", hit_cache_ttl: "60", hostsfile: "[]", max_retries: "2", nameserver: '["8.8.8.8", "8.8.4.4"]', resolve: '["source_field"]', reverse: '["source_field"]', tag_on_timeout: '["_dnstimeout"]', timeout: "0.5" },
-    drop: { percentage: "100" },
-    elapsed: { start_tag: '"task_start"', end_tag: '"task_end"', unique_id_field: '"task_id"', timeout: "1800", new_event_on_match: "true", keep_start_event: '"first"' },
-    elasticsearch: { aggregation_fields: "{}", api_key: '""', ca_trusted_fingerprint: '""', cloud_auth: '""', cloud_id: '""', custom_headers: "{}", docinfo_fields: "{}", enable_sort: "true", fields: "{}", hosts: '["localhost:9200"]', index: '""', password: '""', proxy: '""', query: '""', query_type: '"search"', query_params: "{}", query_template: '""', result_size: "1", retry_on_failure: "0", retry_on_status: "[]", sort: '""', ssl_certificate: '""', ssl_certificate_authorities: "[]", ssl_cipher_suites: "[]", ssl_enabled: "false", ssl_key: '""', ssl_keystore_password: '""', ssl_keystore_path: '""', ssl_keystore_type: '""', ssl_supported_protocols: "[]", ssl_truststore_password: '""', ssl_truststore_path: '""', ssl_truststore_type: '""', ssl_verification_mode: '"full"', tag_on_failure: '["_elasticsearch_lookup_failure"]', target: '"doc"', user: '""' },
-    elastic_integration: { api_key: '""', cloud_auth: '""', cloud_id: '""', geoip_database_directory: '"/usr/share/logstash/geoip"', hosts: '["localhost:9200"]', password: '""', pipeline_name: '"my-pipeline"', proxy: '""', ssl_certificate: '""', ssl_certificate_authorities: "[]", ssl_enabled: "true", ssl_key: '""', ssl_keystore_password: '""', ssl_keystore_path: '""', ssl_key_passphrase: '""', ssl_truststore_path: '""', ssl_truststore_password: '""', ssl_verification_mode: '"full"', username: '"elastic"' },
-    environment: { add_metadata_from_env: '{ "field_name" => "ENV_VAR_NAME" }' },
-    extractnumbers: { source: '"message"' },
-    fingerprint: { base64encode: "false", concatenate_sources: "false", concatenate_all_fields: "false", ecs_compatibility: '"disabled"', key: '"fingerprint_key"', method: '"SHA1"', source: '["message"]', target: '"fingerprint"' },
-    geoip: { cache_size: "1000", database: '""', default_database_type: '"City"', fields: '["city_name", "continent_code", "country_code2", "country_name", "ip", "latitude", "longitude", "postal_code", "region_name", "timezone"]', ecs_compatibility: '"disabled"', source: '"clientip"', tag_on_failure: '["_geoip_lookup_failure"]', target: '"geoip"' },
-    grok: { break_on_match: "true", ecs_compatibility: '"disabled"', keep_empty_captures: "false", match: { field: "message", patterns: ["%{COMBINEDAPACHELOG}"] }, named_captures_only: "true", overwrite: "[]", pattern_definitions: "{}", patterns_dir: "[]", patterns_files_glob: '"*"', tag_on_failure: '["_grokparsefailure"]', tag_on_timeout: '["_groktimeout"]', target: "null", timeout_millis: "30000", timeout_scope: '"event"' },
-    http: { automatic_retries: "1", body: "{}", body_format: '"text"', connect_timeout: "10", cookies: "true", ecs_compatibility: '"disabled"', follow_redirects: "true", headers: "{}", keepalive: "true", password: '""', pool_max: "50", pool_max_per_route: "25", proxy: '""', query: "{}", request_timeout: "6", retry_non_idempotent: "false", socket_timeout: "10", ssl_certificate: '""', ssl_certificate_authorities: "[]", ssl_cipher_suites: "[]", ssl_enabled: "false", ssl_key: '""', ssl_keystore_password: '""', ssl_keystore_path: '""', ssl_keystore_type: '""', ssl_supported_protocols: "[]", ssl_truststore_password: '""', ssl_truststore_path: '""', ssl_truststore_type: '""', ssl_verification_mode: '"full"', target_body: '"body"', target_headers: '"headers"', url: '"http://localhost:8080"', user: '""', validate_after_inactivity: "2000", verb: '"GET"' },
-    i18n: { transliterate: '{ "field" => "ascii" }' },
-    java_uuid: { overwrite: "false", target: '"uuid"' },
-    jdbc_static: { jdbc_connection_string: '"jdbc:derby:memory:testdb;create=true"', jdbc_driver_class: '"org.apache.derby.jdbc.EmbeddedDriver"', jdbc_driver_library: '"/path/to/driver.jar"', jdbc_password: '""', jdbc_user: '""', tag_on_default_use: '["_jdbcstaticdefaults"]', tag_on_failure: '["_jdbcstaticfailure"]', staging_directory: '"/tmp/logstash/jdbc_static/import_data"', loader_schedule: '"0 */2 * * *"', loaders: "[]", local_db_objects: "[]", local_lookups: "[]" },
-    jdbc_streaming: { cache_expiration: "5", cache_size: "500", default_hash: "{}", jdbc_connection_string: '"jdbc:mysql://localhost:3306/mydatabase"', jdbc_driver_class: '"com.mysql.jdbc.Driver"', jdbc_driver_library: '"/path/to/driver.jar"', jdbc_password: '""', jdbc_user: '""', jdbc_validate_connection: "false", jdbc_validation_timeout: "3600", parameters: "{}", prepared_statement_bind_values: "[]", prepared_statement_name: '""', prepared_statement_warn_on_constant_usage: "true", sequel_opts: "{}", statement: '"SELECT * FROM table WHERE id = :id"', tag_on_default_use: '["_jdbcstreamingdefaults"]', tag_on_failure: '["_jdbcstreamingfailure"]', target: '"jdbc_data"', use_cache: "true", use_prepared_statements: "false" },
-    json: { ecs_compatibility: '"disabled"', skip_on_invalid_json: "false", source: '"message"', tag_on_failure: '["_jsonparsefailure"]', target: '"doc"' },
-    json_encode: { source: '"field_to_encode"', target: '"field_to_target"' },
-    kv: { allow_duplicate_values: "true", allow_empty_values: "false", default_keys: "{}", ecs_compatibility: '"disabled"', exclude_keys: "[]", field_split: '" "', field_split_pattern: "null", include_brackets: "true", include_keys: "[]", prefix: '""', recursive: "false", remove_char_key: '""', remove_char_value: '""', source: '"message"', target: "null", tag_on_failure: '["_kv_filter_error"]', tag_on_timeout: '["_kv_filter_timeout"]', timeout_millis: "30000", transform_key: '"lowercase"', transform_value: '"none"', trim_key: '""', trim_value: '""', value_split: '"="', value_split_pattern: "null", whitespace: '"strict"' },
-    memcached: { hosts: '["localhost:11211"]', namespace: '"logstash"', get: '{ "key" => "target_field" }', set: '{ "source_field" => "key" }', tag_on_failure: '["_memcached_failure"]', ttl: "0" },
-    metricize: { drop_original_event: "false", metric_field_name: '"metric"', metrics: "[]", value_field_name: '"value"' },
-    metrics: { clear_interval: "-1", flush_interval: "5", ignore_older_than: "0", meter: "[]", percentiles: "[1, 5, 10, 95, 99, 100]", rates: "[1, 5, 15]", timer: "{}" },
-    mutate: { capitalize: '["fieldname"]', coerce: '{ "field" => "value" }', convert: '{ "fieldname" => "integer" }', copy: '{ "source_field" => "dest_field" }', gsub: '[ "fieldname", "/", "_" ]', join: '{ "fieldname" => "," }', lowercase: '["fieldname"]', merge: '{ "dest_field" => "source_field" }', rename: '{ "old_name" => "new_name" }', replace: '{ "fieldname" => "new_value" }', split: '{ "fieldname" => "," }', strip: '["fieldname"]', tag_on_failure: '["_mutate_error"]', update: '{ "fieldname" => "new_value" }', uppercase: '["fieldname"]' },
-    prune: { blacklist_names: "[]", blacklist_values: "{}", interpolate: "false", whitelist_names: "[]", whitelist_values: "{}" },
-    range: { negate: "false", ranges: "[]" },
-    ruby: { code: "\"event.set('new_field', 'some_value')\"", init: '""', path: '""', script_params: "{}", tag_on_exception: '["_rubyexception"]', tag_with_exception_message: "false" },
-    sleep: { every: "1", replay: "false", time: "1" },
-    split: { field: '"message"', target: "null", terminator: '"\\n"' },
-    syslog_pri: { ecs_compatibility: '"disabled"', facility_labels: '["kernel", "user-level", "mail", "daemon", "security/authorization", "syslogd", "line printer", "network news", "uucp", "clock", "security/authorization", "ftp", "ntp", "log audit", "log alert", "clock", "local0", "local1", "local2", "local3", "local4", "local5", "local6", "local7"]', severity_labels: '["emergency", "alert", "critical", "error", "warning", "notice", "informational", "debug"]', syslog_pri_field_name: '"syslog_pri"', use_labels: "true" },
-    threats_classifier: { password: '""', username: '""' },
-    throttle: { after_count: "-1", before_count: "-1", key: '""', max_age: "3600", max_counters: "100000", period: "60" },
-    tld: { source: '"message"', target: '"tld"' },
-    translate: { destination: '"translation"', dictionary: '{ "key" => "value" }', dictionary_path: '""', ecs_compatibility: '"disabled"', exact: "true", fallback: '""', field: '""', iterate_on: '""', override: "false", refresh_behaviour: '"merge"', refresh_interval: "300", regex: "false", source: '"message"', target: '"translation"', yaml_dictionary_code_point_limit: "134217728", yaml_load_strategy: '"standard"' },
-    truncate: { fields: '"message"', length_bytes: "10" },
-    urldecode: { all_fields: "false", charset: '"UTF-8"', field: '"message"', tag_on_failure: '["_urldecodefailure"]' },
-    useragent: { ecs_compatibility: '"disabled"', lru_cache_size: "1000", prefix: '""', regexes: '""', source: '"message"', target: '"user_agent"' },
-    uuid: { overwrite: "false", target: '"uuid"' },
-    wurfl_device_detection: { cache_size: "100000", host: '"localhost"', inject_wurfl_api_version: "false", inject_wurfl_id: "false", inject_wurfl_info: "false", port: '"80"', scheme: '"http"', source: '"message"', static_capabilities: "[]", virtual_capabilities: "[]" },
-    xml: { force_array: "true", force_content: "false", namespaces: "{}", parse_options: "[]", remove_namespaces: "false", source: '"message"', store_xml: "true", suppress_empty: "true", target: '"xml_content"', xpath: "{}" },
-  },
-  output: {
-    boundary: { api_key: '""', org_id: '""' },
-    circonus: { api_token: '""', app_name: '"logstash"' },
-    cloudwatch: { access_key_id: '""', region: '"us-east-1"', secret_access_key: '""' },
-    csv: { fields: "[]", path: '""' },
-    datadog: { api_key: '""' },
-    datadog_metrics: { api_key: '""' },
-    dynatrace: { api_key: '""', ingest_endpoint_url: '""' },
-    elastic_app_search: { api_key: '""', url: '""' },
-    elastic_workplace_search: { access_token: '""', url: '""' },
-    elasticsearch: { hosts: '["localhost:9200"]', index: '"logstash-%{+YYYY.MM.dd}"' },
-    email: { address: '"smtp.gmail.com"', password: '""', to: '""', username: '""' },
-    exec: { command: '""' },
-    file: { path: '""' },
-    ganglia: { host: '"0.0.0.0"', port: "8649" },
-    gelf: { host: '"0.0.0.0"' },
-    google_bigquery: { dataset: '""', json_key_file: '""', project_id: '""', table_prefix: '"logstash"' },
-    google_cloud_storage: { bucket: '""', json_key_file: '""' },
-    google_pubsub: { json_key_file: '""', project_id: '""', topic: '""' },
-    graphite: { host: '"0.0.0.0"', port: "2003" },
-    graphtastic: { host: '"0.0.0.0"', port: "1337" },
-    http: { http_method: '"post"', url: '""' },
-    influxdb: { db: '"logstash"', host: '"localhost"', measurement: '"logstash"' },
-    irc: { channels: "[]", host: '""' },
-    java_stdout: {},
-    juggernaut: { host: '"localhost"' },
-    kafka: { bootstrap_servers: '"localhost:9092"', topic_id: '"logstash"' },
-    librato: { account_id: '""', api_token: '""' },
-    logstash: { hosts: '["localhost:9800"]' },
-    loggly: { key: '""' },
-    lumberjack: { hosts: '["localhost"]', port: "5000", ssl_certificate: '""' },
-    metriccatcher: { host: '"localhost"', port: "1420" },
-    mongodb: { collection: '"logstash"', database: '"logstash"', uri: '""' },
-    nagios: {},
-    nagios_nsca: { host: '"localhost"', nagios_host: '""', nagios_service: '""', port: "5667" },
-    opentsdb: { host: '"localhost"', port: "4242" },
-    pagerduty: { service_key: '""' },
-    pipe: { command: '""' },
-    rabbitmq: { host: '"localhost"' },
-    redis: { data_type: '"list"', host: '["127.0.0.1"]', key: '"logstash"' },
-    redmine: { token: '""', url: '""' },
-    riak: { nodes: '["localhost:8098"]' },
-    riemann: { host: '"localhost"' },
-    s3: { access_key_id: '""', bucket: '""', secret_access_key: '""' },
-    sink: { codec: '"plain"', enable_metric: "true" },
-    sns: { access_key_id: '""', arn: '""', secret_access_key: '""' },
-    solr_http: { solr_url: '"http://localhost:8983/solr"' },
-    sqs: { access_key_id: '""', queue: '""', secret_access_key: '""' },
-    statsd: { host: '"localhost"', port: "8125" },
-    stdout: { codec: '"rubydebug"' },
-    stomp: { destination: '""', host: '"localhost"' },
-    syslog: { host: '"localhost"', port: "514" },
-    tcp: { host: '"0.0.0.0"', mode: '"client"', port: "5000" },
-    timber: { api_key: '""' },
-    udp: { host: '"0.0.0.0"', port: "5000" },
-    webhdfs: { host: '"localhost"', path: '""', user: '""' },
-    websocket: { host: '"0.0.0.0"', port: "3000" },
-    xmpp: { host: '""', password: '""', rooms: "[]", user: '""' },
-    zabbix: { zabbix_host: '""' },
-  },
 };
 
 const LIBRARY_ITEMS = [
@@ -619,9 +508,10 @@ const parseLogstashConfig = (configStr: string) => {
   const parseGrokMatch = (valStr: string) => {
      try {
        if (!valStr.trim().startsWith('{')) return valStr;
-       const fieldMatch = valStr.match(/"([^"]+)"\s*=>/);
+       // Updated regex to handle both double and single quotes for field names
+       const fieldMatch = valStr.match(/(["'])([^"']+)\1\s*=>/);
        if (!fieldMatch) return valStr;
-       const field = fieldMatch[1];
+       const field = fieldMatch[2]; // Capture group 2 is the content inside quotes
        const patterns: string[] = [];
        const patternRegex = /"(.*?)(?<!\\)"/g;
        let match;
@@ -705,8 +595,8 @@ const parseLogstashConfig = (configStr: string) => {
               }
 
               let category = 'filter'; 
-              if (PLUGIN_DEFINITIONS.input[name]) category = 'input';
-              else if (PLUGIN_DEFINITIONS.output[name]) category = 'output';
+              if (PLUGIN_DEFINITIONS?.input?.[name]) category = 'input';
+              else if (PLUGIN_DEFINITIONS?.output?.[name]) category = 'output';
 
               containerList.push({
                  id: generateId(),
@@ -743,7 +633,14 @@ const analyzeDependencies = (nodes: any[]) => {
 
   const cleanFieldName = (f: string) => {
     if (!f) return null;
-    return f.replace(/^"|'|"|'$/g, '').replace(/^\[|\]$/g, '').trim();
+    // Safer quote removal: matches start quote OR end quote
+    let clean = f.replace(/^["']|["']$/g, '').trim();
+    // Normalize [field] to field for consistency (matches top-level refs), 
+    // but keep [nested][field] as is.
+    if (clean.startsWith('[') && clean.endsWith(']') && clean.indexOf('][') === -1) {
+       clean = clean.substring(1, clean.length - 1);
+    }
+    return clean;
   };
 
   const register = (field: string, nodeId: string, type: 'producers' | 'consumers') => {
@@ -764,6 +661,26 @@ const analyzeDependencies = (nodes: any[]) => {
     }
   };
 
+  // Recursive scanner for field references in properties (strings, arrays, objects)
+  const scanForFieldRefs = (val: any, nodeId: string) => {
+      if (typeof val === 'string') {
+          // 1. Interpolated fields: %{field}
+          findInterpolatedFields(val, nodeId);
+          
+          // 2. Bracketed field references: [field] or [nested][field]
+          // Matches one or more groups of [chars]
+          const bracketRegex = /((?:\[[a-zA-Z0-9_@\-\.]+\s*\])+)/g;
+          let match;
+          while ((match = bracketRegex.exec(val)) !== null) {
+              register(match[1], nodeId, 'consumers');
+          }
+      } else if (Array.isArray(val)) {
+          val.forEach(v => scanForFieldRefs(v, nodeId));
+      } else if (typeof val === 'object' && val !== null) {
+          Object.values(val).forEach(v => scanForFieldRefs(v, nodeId));
+      }
+  };
+
   const traverse = (list: any[]) => {
     list.forEach(node => {
       if (node.category === 'input') {
@@ -772,7 +689,8 @@ const analyzeDependencies = (nodes: any[]) => {
         register('host', node.id, 'producers');
       }
       if (node.type === 'conditional' && node.condition) {
-        const condRegex = /\[([a-zA-Z0-9_@\-]+)\]/g;
+        // Capture full nested fields like [a][b] or single fields like [a]
+        const condRegex = /((?:\[[^\]]+\])+)/g;
         let match;
         while ((match = condRegex.exec(node.condition)) !== null) {
           register(match[1], node.id, 'consumers');
@@ -781,20 +699,26 @@ const analyzeDependencies = (nodes: any[]) => {
       if (node.properties) {
         if (node.properties.add_field) {
            const addFieldStr = node.properties.add_field;
-           const keyMatch = /"([a-zA-Z0-9_@\-]+)"\s*=>/.exec(addFieldStr);
-           if (keyMatch) register(keyMatch[1], node.id, 'producers');
+           const fieldRegex = /"([a-zA-Z0-9_@\-\[\]]+)"\s*=>/g;
+           let keyMatch;
+           while ((keyMatch = fieldRegex.exec(addFieldStr)) !== null) {
+              register(keyMatch[1], node.id, 'producers');
+           }
         }
 
+        // Use the recursive scanner for all properties to catch nested/deep refs
         Object.entries(node.properties).forEach(([key, val]: [string, any]) => {
            if (node.name === 'dissect' && key === 'mapping') return;
-           if(typeof val === 'string') findInterpolatedFields(val, node.id);
+           scanForFieldRefs(val, node.id);
         });
 
         if (node.properties.target) register(node.properties.target, node.id, 'producers');
         if (node.properties.source) register(node.properties.source, node.id, 'consumers');
 
-        if (node.name === 'grok' && node.properties.match) {
-            register(node.properties.match.field, node.id, 'consumers');
+        if (node.name === 'grok' && node.properties.match && typeof node.properties.match === 'object') {
+            if (node.properties.match.field) {
+                register(node.properties.match.field, node.id, 'consumers');
+            }
             const patterns = node.properties.match.patterns || [];
             patterns.forEach((pat: string) => {
                const regexStandard = /%\{[A-Z0-9_]+:([a-zA-Z0-9_@\[\]]+)(?::[a-zA-Z]+)?\}/g;
@@ -811,7 +735,8 @@ const analyzeDependencies = (nodes: any[]) => {
 
         if (node.name === 'mutate') {
            if (node.properties.rename) {
-              const renameRegex = /"([a-zA-Z0-9_@\-]+)"\s*=>\s*"([a-zA-Z0-9_@\-]+)"/g;
+              // Updated to include brackets [] in field names
+              const renameRegex = /"([a-zA-Z0-9_@\-\[\]]+)"\s*=>\s*"([a-zA-Z0-9_@\-\[\]]+)"/g;
               let match;
               while ((match = renameRegex.exec(node.properties.rename)) !== null) {
                  register(match[1], node.id, 'consumers');
@@ -819,7 +744,8 @@ const analyzeDependencies = (nodes: any[]) => {
               }
            }
            if (node.properties.copy) {
-              const copyRegex = /"([a-zA-Z0-9_@\-]+)"\s*=>\s*"([a-zA-Z0-9_@\-]+)"/g;
+              // Updated to include brackets [] in field names
+              const copyRegex = /"([a-zA-Z0-9_@\-\[\]]+)"\s*=>\s*"([a-zA-Z0-9_@\-\[\]]+)"/g;
               let match;
               while ((match = copyRegex.exec(node.properties.copy)) !== null) {
                  register(match[1], node.id, 'consumers');
@@ -987,8 +913,10 @@ const PipelineNode = ({ node, selectedId, onSelect, onDrop, onDragStart, onDragO
           bgColor = 'bg-emerald-900/20';
           shadowClass = 'shadow-[0_0_15px_rgba(16,185,129,0.3)]';
       } else if (!node.isRoot) {
-          bgColor = 'bg-slate-950 opacity-40';
-          borderColor = 'border-slate-800';
+          // Dim non-correlated nodes using transparent background + darker text, NO opacity-40
+          bgColor = 'bg-slate-950/50';
+          borderColor = 'border-slate-800/50';
+          textColor = 'text-slate-600';
       }
   }
 
@@ -1163,6 +1091,7 @@ export default function LogstashBuilder() {
     input: false, filter: false, output: false, logic: false, comment: false
   });
   const [searchQuery, setSearchQuery] = useState('');
+  const [highlightIndex, setHighlightIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const selectedNode = useMemo(() => {
@@ -1172,6 +1101,11 @@ export default function LogstashBuilder() {
   }, [nodes, selectedId]);
 
   const dependencies = useMemo(() => analyzeDependencies(nodes), [nodes]);
+
+  // Reset highlight index when active field changes
+  useEffect(() => {
+    setHighlightIndex(0);
+  }, [activeField]);
 
   const filteredLibraryItems = useMemo(() => {
     if (!searchQuery) return LIBRARY_ITEMS;
@@ -1185,6 +1119,39 @@ export default function LogstashBuilder() {
   const toggleSection = (category: string) => setOpenSections((prev: any) => ({ ...prev, [category]: !prev[category] }));
   const expandAll = () => setOpenSections({ input: true, filter: true, output: true, logic: true, comment: true });
   const collapseAll = () => setOpenSections({ input: false, filter: false, output: false, logic: false, comment: false });
+
+  const getSortedCorrelatedIds = (fieldName: string) => {
+      if (!dependencies[fieldName]) return [];
+      const dep = dependencies[fieldName];
+      const relevantIds = new Set([...dep.producers, ...dep.consumers]);
+      const sortedIds: string[] = [];
+      const traverse = (nList: any[]) => {
+          nList.forEach(node => {
+              if (relevantIds.has(node.id)) sortedIds.push(node.id);
+              if (node.children) traverse(node.children);
+          });
+      }
+      traverse(nodes);
+      return sortedIds;
+  };
+
+  const handleNavigate = (direction: 'next' | 'prev') => {
+      if (!activeField) return;
+      const sortedIds = getSortedCorrelatedIds(activeField);
+      if (sortedIds.length === 0) return;
+
+      let newIndex = direction === 'next' ? highlightIndex + 1 : highlightIndex - 1;
+      if (newIndex >= sortedIds.length) newIndex = 0;
+      if (newIndex < 0) newIndex = sortedIds.length - 1;
+
+      setHighlightIndex(newIndex);
+      
+      const targetId = sortedIds[newIndex];
+      const el = document.getElementById(`node-${targetId}`);
+      if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+  };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -1776,18 +1743,7 @@ export default function LogstashBuilder() {
 
         <div className="flex-1 overflow-auto p-8 relative" ref={scrollContainerRef} onDragOver={(e) => { e.preventDefault(); setDropTarget(null); }}>
            {showInsights && <ConnectionLines activeField={activeField} dependencies={dependencies} containerRef={scrollContainerRef} />}
-           {showInsights && (
-             <div className="absolute top-4 right-4 w-48 bg-slate-900/90 border border-slate-700 rounded p-2 z-30 shadow-2xl backdrop-blur">
-               <div className="text-[10px] font-bold text-slate-500 uppercase mb-2">Trace Fields</div>
-               {Object.keys(dependencies).length === 0 && <div className="text-xs text-slate-600 italic">No fields detected</div>}
-               {Object.keys(dependencies).map(field => (
-                 <button key={field} onClick={() => setActiveField(activeField === field ? null : field)} className={`w-full text-left text-xs px-2 py-1 rounded mb-1 flex justify-between items-center ${activeField === field ? 'bg-sky-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>
-                   <span className="truncate">{field}</span>
-                   {activeField === field && <Activity className="w-3 h-3" />}
-                 </button>
-               ))}
-             </div>
-           )}
+           {/* Trace Fields panel removed from here */}
 
            {showConfig ? (
              <div className="relative h-full">
@@ -1819,41 +1775,73 @@ export default function LogstashBuilder() {
       </div>
 
       <div className="w-72 bg-slate-900 border-l border-slate-800 flex flex-col z-20">
-        <div className="p-4 border-b border-slate-800"><h2 className="font-bold flex items-center gap-2"><Settings className="w-4 h-4 text-sky-500" /> Properties</h2></div>
-        
-        {selectedNode ? (
-          <div className="flex-1 overflow-y-auto p-4">
-             <div className="mb-4">
-               <label className="text-xs text-slate-500 font-bold uppercase">Type</label>
-               <div className="text-sm font-mono text-sky-400">{selectedNode.name}</div>
-             </div>
-
-             {(selectedNode.type === 'conditional' || selectedNode.condition !== undefined) && (
-               <div className="mb-4">
-                 <label className="text-xs text-slate-500 font-bold uppercase">Condition</label>
-                 <div className="flex gap-1 mt-1">
-                   <input className="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-yellow-500 font-mono focus:border-sky-500 outline-none" value={selectedNode.condition || ''} onChange={(e) => handleUpdateProp('condition', e.target.value)} placeholder="[status] == 200" />
-                   <button onClick={() => setExpandedProp({ title: 'Condition', value: selectedNode.condition || '', onSave: (val: string) => handleUpdateProp('condition', val) })} className="bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-400 px-2 rounded"><Maximize2 className="w-3 h-3" /></button>
-                 </div>
-               </div>
-             )}
-
-             {selectedNode.type === 'comment' && (
-               <div className="mb-4">
-                 <label className="text-xs text-slate-500 font-bold uppercase">Comment Text</label>
-                 <div className="flex gap-1 mt-1">
-                   <textarea className="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-slate-300 focus:border-sky-500 outline-none h-20" value={selectedNode.text || ''} onChange={(e) => handleUpdateProp('text', e.target.value)} />
-                   <button onClick={() => setExpandedProp({ title: 'Comment Text', value: selectedNode.text || '', onSave: (val: string) => handleUpdateProp('text', val) })} className="h-8 bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-400 px-2 rounded"><Maximize2 className="w-3 h-3" /></button>
-                 </div>
-               </div>
-             )}
-
-             {selectedNode.type === 'plugin' && selectedNode.properties && (renderPropertiesPanel())}
-
-             <button onClick={() => handleRequestDelete()} className="w-full mt-8 bg-red-900/30 border border-red-900 text-red-400 py-2 rounded text-sm hover:bg-red-900/50 flex items-center justify-center gap-2"><Trash2 className="w-4 h-4" /> Delete Block</button>
+        {showInsights ? (
+          <div className="flex flex-col h-full">
+            <div className="p-4 border-b border-slate-800 flex justify-between items-center">
+              <h2 className="font-bold flex items-center gap-2"><Activity className="w-4 h-4 text-sky-500" /> Trace Fields</h2>
+              {activeField && getSortedCorrelatedIds(activeField).length > 1 && (
+                  <div className="flex items-center gap-1 bg-slate-800 rounded px-1">
+                      <button type="button" onClick={() => handleNavigate('prev')} className="p-1 hover:text-white text-slate-400" title="Previous occurrence"><ChevronLeft className="w-4 h-4" /></button>
+                      <span className="text-[10px] font-mono text-slate-400 min-w-[30px] text-center">{highlightIndex + 1}/{getSortedCorrelatedIds(activeField).length}</span>
+                      <button type="button" onClick={() => handleNavigate('next')} className="p-1 hover:text-white text-slate-400" title="Next occurrence"><ChevronRight className="w-4 h-4" /></button>
+                  </div>
+              )}
+            </div>
+            <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+               {Object.keys(dependencies).length === 0 && <div className="text-xs text-slate-600 italic">No fields detected</div>}
+               {Object.keys(dependencies)
+                 .filter(field => {
+                    const dep = dependencies[field];
+                    const unique = new Set([...dep.producers, ...dep.consumers]);
+                    return unique.size >= 2;
+                 })
+                 .sort().map(field => (
+                 <button key={field} onClick={() => setActiveField(activeField === field ? null : field)} className={`w-full text-left text-xs px-2 py-1 rounded mb-1 flex justify-between items-center ${activeField === field ? 'bg-sky-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>
+                   <span className="truncate">{field}</span>
+                   {activeField === field && <Activity className="w-3 h-3" />}
+                 </button>
+               ))}
+            </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center text-slate-600 p-8 text-center"><Settings className="w-12 h-12 mb-4 opacity-20" /><p className="text-sm">Select a block in the pipeline to edit properties.</p></div>
+          <>
+            <div className="p-4 border-b border-slate-800"><h2 className="font-bold flex items-center gap-2"><Settings className="w-4 h-4 text-sky-500" /> Properties</h2></div>
+            
+            {selectedNode ? (
+              <div className="flex-1 overflow-y-auto p-4">
+                 <div className="mb-4">
+                   <label className="text-xs text-slate-500 font-bold uppercase">Type</label>
+                   <div className="text-sm font-mono text-sky-400">{selectedNode.name}</div>
+                 </div>
+
+                 {(selectedNode.type === 'conditional' || selectedNode.condition !== undefined) && (
+                   <div className="mb-4">
+                     <label className="text-xs text-slate-500 font-bold uppercase">Condition</label>
+                     <div className="flex gap-1 mt-1">
+                       <input className="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-yellow-500 font-mono focus:border-sky-500 outline-none" value={selectedNode.condition || ''} onChange={(e) => handleUpdateProp('condition', e.target.value)} placeholder="[status] == 200" />
+                       <button onClick={() => setExpandedProp({ title: 'Condition', value: selectedNode.condition || '', onSave: (val: string) => handleUpdateProp('condition', val) })} className="bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-400 px-2 rounded"><Maximize2 className="w-3 h-3" /></button>
+                     </div>
+                   </div>
+                 )}
+
+                 {selectedNode.type === 'comment' && (
+                   <div className="mb-4">
+                     <label className="text-xs text-slate-500 font-bold uppercase">Comment Text</label>
+                     <div className="flex gap-1 mt-1">
+                       <textarea className="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-slate-300 focus:border-sky-500 outline-none h-20" value={selectedNode.text || ''} onChange={(e) => handleUpdateProp('text', e.target.value)} />
+                       <button onClick={() => setExpandedProp({ title: 'Comment Text', value: selectedNode.text || '', onSave: (val: string) => handleUpdateProp('text', val) })} className="h-8 bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-400 px-2 rounded"><Maximize2 className="w-3 h-3" /></button>
+                     </div>
+                   </div>
+                 )}
+
+                 {selectedNode.type === 'plugin' && selectedNode.properties && (renderPropertiesPanel())}
+
+                 <button onClick={() => handleRequestDelete()} className="w-full mt-8 bg-red-900/30 border border-red-900 text-red-400 py-2 rounded text-sm hover:bg-red-900/50 flex items-center justify-center gap-2"><Trash2 className="w-4 h-4" /> Delete Block</button>
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col items-center justify-center text-slate-600 p-8 text-center"><Settings className="w-12 h-12 mb-4 opacity-20" /><p className="text-sm">Select a block in the pipeline to edit properties.</p></div>
+            )}
+          </>
         )}
       </div>
     </div>
