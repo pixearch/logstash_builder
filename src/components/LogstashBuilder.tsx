@@ -1593,8 +1593,8 @@ const parseLogstashConfig = (configStr: string) => {
               }
 
               let category = 'filter'; 
-              if (PLUGIN_DEFINITIONS?.input?.[name]) category = 'input';
-              else if (PLUGIN_DEFINITIONS?.output?.[name]) category = 'output';
+              if (REQUIRED_FIELDS?.input?.[name]) category = 'input';
+              else if (REQUIRED_FIELDS?.output?.[name]) category = 'output';
 
               containerList.push({
                  id: generateId(),
